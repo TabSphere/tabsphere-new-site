@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ExternalLink, X } from 'lucide-react';
+import { ExternalLink, X, Globe } from 'lucide-react';
 
 const projects = [
   {
@@ -11,6 +11,7 @@ const projects = [
     description: 'Full responsive website for a professional cleaning company serving Stirling and surrounding areas. Features online quoting, service pages, and local SEO optimization.',
     tags: ['Web Design', 'SEO', 'Responsive'],
     link: 'https://nationwidecleaningserviceslimited.co.uk',
+    liveSite: true,
     stats: { views: '2.4K', conversion: '+35%' },
   },
   {
@@ -22,7 +23,8 @@ const projects = [
     description: 'Cross-platform logistics app built with Flutter for real-time rail cargo tracking. Features secure login, real-time access, and intuitive navigation for staff and passengers.',
     tags: ['Flutter', 'iOS', 'Android'],
     link: '#',
-    stats: { users: '500+', rating: '4.8★' },
+    liveSite: false,
+    stats: { users: '500+', rating: '4.8\u2605' },
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const projects = [
     description: 'Comprehensive digital audit and website redesign for a UK security firm. Mobile-first responsive design with improved accessibility and structured service layout.',
     tags: ['Audit', 'WCAG', 'Redesign'],
     link: '#',
+    liveSite: false,
     stats: { issues: '23', resolved: '100%' },
   },
   {
@@ -41,10 +44,11 @@ const projects = [
     category: 'Branding',
     year: '2025',
     image: '/project-branding.jpg',
-    description: 'Complete branding package for an African cuisine restaurant — menus, signage, flyers and collateral across all touchpoints. Vibrant design capturing warmth and authenticity.',
+    description: 'Complete branding package for an African cuisine restaurant \u2014 menus, signage, flyers and collateral across all touchpoints. Vibrant design capturing warmth and authenticity.',
     tags: ['Branding', 'Print', 'Menu Design'],
     link: '#',
-    stats: { items: '15+', satisfaction: '5★' },
+    liveSite: false,
+    stats: { items: '15+', satisfaction: '5\u2605' },
   },
   {
     id: 5,
@@ -55,6 +59,7 @@ const projects = [
     description: 'Full enterprise website design delivering a modern, conversion-focused presence. Clean professional aesthetic with integrated CRM and analytics.',
     tags: ['Enterprise', 'CRM', 'Analytics'],
     link: '#',
+    liveSite: false,
     stats: { leads: '+120%', load: '0.8s' },
   },
 ];
@@ -157,6 +162,20 @@ export default function Portfolio() {
                 <div className="absolute top-4 right-4 text-sm text-gray-400">
                   {project.year}
                 </div>
+
+                {/* Live Site Badge */}
+                {project.liveSite && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm hover:bg-green-500/30 transition-colors"
+                  >
+                    <Globe className="w-3 h-3" />
+                    Live Site
+                  </a>
+                )}
               </div>
 
               {/* Content */}
@@ -190,9 +209,7 @@ export default function Portfolio() {
         {/* View All Link */}
         <div className="text-center mt-12">
           <a
-            href="https://tabsphere.github.io/PORTFOLIO/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/portfolio"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-orange-500/50 text-white font-medium transition-all hover:bg-white/5"
           >
             View Full Portfolio
@@ -267,18 +284,32 @@ export default function Portfolio() {
                 ))}
               </div>
 
-              {/* CTA */}
-              {selectedProject.link !== '#' && (
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-3">
+                {selectedProject.liveSite && selectedProject.link !== '#' && (
+                  <a
+                    href={selectedProject.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition-all"
+                  >
+                    <Globe className="w-4 h-4" />
+                    View Live Site
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
                 <a
-                  href={selectedProject.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition-all"
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedProject(null);
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-orange-500/50 text-white font-semibold rounded-xl transition-all hover:bg-white/5"
                 >
-                  Visit Live Site
-                  <ExternalLink className="w-4 h-4" />
+                  Start a Similar Project
                 </a>
-              )}
+              </div>
             </div>
           </div>
         </div>

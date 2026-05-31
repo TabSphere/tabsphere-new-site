@@ -5,24 +5,24 @@ const footerLinks = {
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#home' },
     { label: 'Services', href: '#services' },
+    { label: 'Work', href: '#work' },
     { label: 'Contact', href: '#contact' },
   ],
   services: [
     { label: 'Web Development', href: '#services' },
     { label: 'Mobile Apps', href: '#services' },
     { label: 'Cybersecurity', href: '#services' },
-    { label: 'Graphic Design', href: '#services' },
+    { label: 'Branding', href: '#services' },
     { label: 'SaaS Platforms', href: '#services' },
   ],
-  marketplace: [
+  shop: [
+    { label: 'Etsy Shop', href: 'https://www.etsy.com/shop/TabsphereCreatives', external: true },
     { label: 'TabSphere Market', href: 'https://market.tabsphere.co.uk', external: true },
-    { label: 'Etsy Shop', href: 'https://www.etsy.com/uk/shop/TabsphereDigital', external: true },
-    { label: 'AI Business Tools', href: 'https://www.etsy.com/uk/shop/TabsphereDigital', external: true },
-    { label: 'Digital Templates', href: 'https://market.tabsphere.co.uk', external: true },
+    { label: 'Digital Products', href: '#products', external: false },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
+    { label: 'Privacy Policy', href: '#privacy' },
+    { label: 'Terms of Service', href: '#terms' },
   ],
 };
 
@@ -80,9 +80,9 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-1">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <a href="#home" className="flex items-center gap-2 mb-4">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
                 <Globe className="w-5 h-5 text-white" />
@@ -158,20 +158,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Marketplace Links */}
+          {/* Shop Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Marketplace</h3>
+            <h3 className="text-white font-semibold mb-4">Shop</h3>
             <ul className="space-y-2">
-              {footerLinks.marketplace.map((link) => (
+              {footerLinks.shop.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => {
+                      if (!link.external && link.href.startsWith('#')) {
+                        e.preventDefault();
+                        scrollToSection(link.href);
+                      }
+                    }}
                     className="text-sm text-gray-400 hover:text-orange-500 transition-colors inline-flex items-center gap-1"
                   >
                     {link.label}
-                    <ExternalLink className="w-3 h-3" />
+                    {link.external && <ExternalLink className="w-3 h-3" />}
                   </a>
                 </li>
               ))}
@@ -182,16 +188,30 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  href="#privacy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('privacy-policy')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#terms"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('terms-of-service')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
+                >
+                  Terms of Service
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -202,7 +222,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500">
-              © 2026 TabSphere LTD. All Rights Reserved.
+              &copy; 2026 TabSphere LTD. All Rights Reserved.
             </p>
             <p className="text-sm text-gray-500">
               Registered in Scotland, United Kingdom. Company No. 16534288

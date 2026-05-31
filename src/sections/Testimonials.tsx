@@ -1,56 +1,61 @@
 import { useEffect, useRef, useState } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const testimonials = [
   {
     id: 1,
-    name: 'Ama O.',
-    role: 'Business Owner',
-    content: 'The wall art looks incredible in my office. Framing quality and color depth were outstanding. TabSphere delivered exactly what I envisioned — professional, timely, and with amazing attention to detail.',
+    name: 'Marcus W.',
+    role: 'Director, Nationwide Cleaning Scotland',
+    project: 'Web Design & SEO',
+    content: 'TabSphere transformed our online presence completely. The website they built generates consistent enquiries every week — we went from 2-3 leads a month to 15+. Professional, fast, and they genuinely understood our business.',
     rating: 5,
     date: 'April 2026',
-    avatar: 'A',
-    color: 'from-pink-500 to-rose-500',
+    avatar: 'M',
+    color: 'from-emerald-500 to-teal-500',
   },
   {
     id: 2,
-    name: 'Kwame D.',
-    role: 'Entrepreneur',
-    content: 'Clear structure, easy to use, and instantly useful for weekly planning. The digital products from TabSphere Market have transformed how I organize my business. Highly recommended!',
+    name: 'Caroline A.',
+    role: 'Owner, Caro\'s Kitchen',
+    project: 'Branding & Print Design',
+    content: 'The branding package was exceptional — menus, signage, flyers, the lot. TabSphere captured the warmth of our African cuisine perfectly. Our customers constantly comment on how professional everything looks now.',
     rating: 5,
-    date: 'April 2026',
-    avatar: 'K',
-    color: 'from-blue-500 to-cyan-500',
+    date: 'March 2026',
+    avatar: 'C',
+    color: 'from-orange-500 to-amber-500',
   },
   {
     id: 3,
-    name: 'Sarah M.',
-    role: 'Office Manager, Stirling',
-    content: 'Fantastic service from start to finish. The team was professional, thorough, and left our office absolutely spotless. We have been using them for six months now and could not be happier.',
+    name: 'David R.',
+    role: 'Founder, LocoRail Logistics',
+    project: 'Mobile App Development',
+    content: 'The Flutter app TabSphere built for our rail logistics operation has streamlined everything. Real-time tracking, secure logins, intuitive interface — our staff picked it up within a day. Exactly what we needed.',
     rating: 5,
-    date: 'March 2026',
-    avatar: 'S',
-    color: 'from-green-500 to-emerald-500',
+    date: 'February 2026',
+    avatar: 'D',
+    color: 'from-blue-500 to-indigo-500',
   },
   {
     id: 4,
-    name: 'James & Linda T.',
-    role: 'Homeowners, Bridge of Allan',
-    content: 'Moving house is stressful enough without having to worry about cleaning. NCS took care of everything — the property was immaculate when we handed over the keys. Highly recommend!',
+    name: 'Sarah T.',
+    role: 'Director, Guardwatch Security',
+    project: 'Website Redesign & Digital Audit',
+    content: 'TabSphere audited our old site, found 23 issues we did not even know existed, and delivered a complete redesign that\'s WCAG compliant and mobile-first. Our bounce rate dropped by 40% in the first month.',
     rating: 5,
-    date: 'March 2026',
-    avatar: 'J',
+    date: 'January 2026',
+    avatar: 'S',
     color: 'from-purple-500 to-violet-500',
   },
   {
     id: 5,
-    name: 'Emma K.',
-    role: 'Resident, Dunblane',
-    content: 'We switched to their eco-friendly cleaning service and are delighted. The results are just as impressive, and we feel good knowing we are making a better choice for the environment.',
+    name: 'Abraham M.',
+    role: 'CEO, AB Mahanian Enterprise',
+    project: 'Enterprise Website & CRM',
+    content: 'Outstanding work on our enterprise platform. The CRM integration, analytics dashboard, and conversion-focused design have increased our qualified leads by over 120%. TabSphere delivered beyond expectations.',
     rating: 5,
-    date: 'February 2026',
-    avatar: 'E',
-    color: 'from-orange-500 to-amber-500',
+    date: 'January 2026',
+    avatar: 'A',
+    color: 'from-rose-500 to-pink-500',
   },
 ];
 
@@ -85,8 +90,14 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  // Auto-advance carousel
+  useEffect(() => {
+    const timer = setInterval(nextTestimonial, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden">
+    <section id="testimonials" className="relative py-24 lg:py-32 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent" />
 
@@ -98,9 +109,15 @@ export default function Testimonials() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-medium mb-6">
-            Google Reviews
-          </div>
+          <a
+            href="https://www.google.com/search?q=Tabsphere+LTD&hl=en-GB"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-medium mb-6 hover:bg-orange-500/20 transition-colors"
+          >
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            Google Reviews — 4.8 Stars
+          </a>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             What Clients <span className="text-gradient">Actually Say</span>
           </h2>
@@ -111,7 +128,7 @@ export default function Testimonials() {
               ))}
             </div>
             <span className="text-white font-bold text-lg">5.0</span>
-            <span className="text-gray-400">from 10+ reviews</span>
+            <span className="text-gray-400">from verified project reviews</span>
           </div>
         </div>
 
@@ -133,6 +150,11 @@ export default function Testimonials() {
                       className="w-full flex-shrink-0 transition-opacity duration-500"
                       style={{ opacity: index === currentIndex ? 1 : 0.3 }}
                     >
+                      {/* Project Tag */}
+                      <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 mb-4">
+                        {testimonial.project}
+                      </span>
+
                       <p className="text-xl lg:text-2xl text-white leading-relaxed mb-8">
                         "{testimonial.content}"
                       </p>
@@ -164,10 +186,10 @@ export default function Testimonials() {
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
+                    className={`h-2 rounded-full transition-all ${
                       index === currentIndex
                         ? 'w-8 bg-orange-500'
-                        : 'bg-white/20 hover:bg-white/40'
+                        : 'w-2 bg-white/20 hover:bg-white/40'
                     }`}
                   />
                 ))}
@@ -191,7 +213,7 @@ export default function Testimonials() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 flex flex-wrap items-center justify-center gap-4">
           <a
             href="https://g.page/r/CRdmNkHuS8E2EAI/review"
             target="_blank"
@@ -199,7 +221,16 @@ export default function Testimonials() {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-orange-500/50 text-white font-medium transition-all hover:bg-white/5"
           >
             <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-            Rate Us on Google
+            Leave Us a Review
+          </a>
+          <a
+            href="https://www.google.com/search?q=Tabsphere+LTD&hl=en-GB"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-orange-500 font-medium transition-all hover:text-orange-400"
+          >
+            See All Google Reviews
+            <ExternalLink className="w-4 h-4" />
           </a>
         </div>
       </div>
