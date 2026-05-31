@@ -17,7 +17,6 @@ const footerLinks = {
   ],
   shop: [
     { label: 'Etsy Shop', href: 'https://www.etsy.com/shop/TabsphereCreatives', external: true },
-    { label: 'TabSphere Market', href: 'https://market.tabsphere.co.uk', external: true },
     { label: 'Digital Products', href: '#products', external: false },
   ],
   legal: [
@@ -65,13 +64,11 @@ export default function Footer() {
                 Start a Project
               </a>
               <a
-                href="https://market.tabsphere.co.uk"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#products"
+                onClick={(e) => { e.preventDefault(); scrollToSection('#products'); }}
                 className="px-8 py-3.5 border border-white/20 hover:border-orange-500/50 text-white font-semibold rounded-xl transition-all hover:bg-white/5 flex items-center gap-2"
               >
-                Visit Market
-                <ExternalLink className="w-4 h-4" />
+                View Products
               </a>
             </div>
           </div>
@@ -83,13 +80,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <a href="#home" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-lg font-bold text-white">
-                Tab<span className="text-orange-500">Sphere</span>
-              </span>
+            <a href="#home" className="flex items-center gap-3 mb-4">
+              <img src="/TabSphere_Logo.png" alt="TabSphere" className="h-10 w-auto rounded-lg" />
             </a>
             <p className="text-sm text-gray-400 mb-6">
               A Stirling-based digital studio delivering websites, apps and digital strategies for businesses across Scotland and the UK.

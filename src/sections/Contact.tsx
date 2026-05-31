@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { supabase } from '../lib/supabase';
 import { 
   Send, 
   MapPin, 
@@ -50,8 +51,18 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Save to Supabase
+    const { error } = await supabase.from('contact_submissions').insert({
+      name: formState.name,
+      email: formState.email,
+      phone: formState.phone || null,
+      service: formState.service || null,
+      message: formState.message,
+    });
+    
+    if (error) {
+      console.error('Contact submission error:', error);
+    }
     
     setIsSubmitting(false);
     setSubmitted(true);

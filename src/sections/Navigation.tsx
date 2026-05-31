@@ -8,6 +8,7 @@ const navLinks = [
   { label: 'Process', href: '#process' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Products', href: '#products' },
+  { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -85,20 +86,18 @@ export default function Navigation() {
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-3 group"
           >
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-glow group-hover:shadow-glow-lg transition-shadow">
-              <Globe className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-lg font-bold text-white">
-              Tab<span className="text-orange-500">Sphere</span>
-            </span>
+            <img 
+              src="/TabSphere_Logo.png" 
+              alt="TabSphere" 
+              className="h-10 w-auto rounded-lg"
+            />
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => {
-              // Products gets special dropdown treatment
               if (link.label === 'Products') {
                 return (
                   <div
@@ -119,7 +118,6 @@ export default function Navigation() {
                       <ChevronDown className={`w-3 h-3 transition-transform ${isProductDropdownOpen ? 'rotate-180' : ''}`} />
                     </button>
 
-                    {/* Products Dropdown */}
                     {isProductDropdownOpen && (
                       <div className="absolute top-full left-0 mt-2 w-72 glass rounded-xl border border-white/10 p-2 shadow-2xl">
                         {productDropdown.map((item) => {
@@ -152,6 +150,22 @@ export default function Navigation() {
                 );
               }
 
+              if (link.label === 'Blog') {
+                return (
+                  <a
+                    key={link.href}
+                    href="/blog"
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      activeSection === 'blog'
+                        ? 'text-orange-500 bg-orange-500/10'
+                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    Blog
+                  </a>
+                );
+              }
+
               return (
                 <a
                   key={link.href}
@@ -167,27 +181,15 @@ export default function Navigation() {
                 </a>
               );
             })}
-
-            {/* Resources link */}
-            <span
-              className="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 cursor-not-allowed flex items-center gap-1"
-              title="Blog coming soon"
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              Resources
-              <span className="px-1.5 py-0.5 text-[10px] rounded bg-orange-500/20 text-orange-400 font-medium">Soon</span>
-            </span>
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="https://market.tabsphere.co.uk"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/client/login"
               className="text-sm text-gray-300 hover:text-orange-500 transition-colors"
             >
-              Market
+              Client Login
             </a>
             <a
               href="#contact"
@@ -218,8 +220,13 @@ export default function Navigation() {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
-              onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+              href={link.href === '/blog' ? '/blog' : link.href}
+              onClick={(e) => {
+                if (!link.href.startsWith('/')) {
+                  e.preventDefault();
+                  scrollToSection(link.href);
+                }
+              }}
               className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                 activeSection === link.href.slice(1)
                   ? 'text-orange-500 bg-orange-500/10'
@@ -230,7 +237,6 @@ export default function Navigation() {
             </a>
           ))}
 
-          {/* Mobile Products Submenu */}
           <div className="px-4 py-2 border-t border-white/5 mt-2 pt-2">
             <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Shop</p>
             {productDropdown.map((item) => (
@@ -248,18 +254,11 @@ export default function Navigation() {
           </div>
 
           <div className="pt-3 border-t border-white/5 space-y-2">
-            <span className="block px-4 py-2 text-sm text-gray-500 flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
-              Resources
-              <span className="px-1.5 py-0.5 text-[10px] rounded bg-orange-500/20 text-orange-400">Soon</span>
-            </span>
             <a
-              href="https://market.tabsphere.co.uk"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/client/login"
               className="block px-4 py-3 rounded-lg text-sm text-gray-300 hover:text-orange-500 transition-colors"
             >
-              TabSphere Market
+              Client Login
             </a>
             <a
               href="#contact"

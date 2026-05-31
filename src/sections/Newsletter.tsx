@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 import { Mail, ArrowRight, Check, Download, Sparkles } from 'lucide-react';
 
 export default function Newsletter() {
@@ -25,11 +26,18 @@ export default function Newsletter() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) return;
 
-    // Store in localStorage for now — upgrade to backend later
+    // Save to Supabase
+    await supabase.from('newsletter_subscribers').upsert({
+      email: email.toLowerCase().trim(),
+      source: 'website-newsletter',
+      subscribed: true,
+    }, { onConflict: 'email' });
+
+    // Also keep localStorage as backup
     const subscribers = JSON.parse(localStorage.getItem('tabsphere_subscribers') || '[]');
     if (!subscribers.includes(email)) {
       subscribers.push(email);
