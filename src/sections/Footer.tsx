@@ -1,4 +1,4 @@
-import { Globe, Instagram, Facebook, Youtube, MessageCircle, ExternalLink } from 'lucide-react';
+import { Instagram, Facebook, Youtube, MessageCircle, ExternalLink } from 'lucide-react';
 
 const footerLinks = {
   company: [

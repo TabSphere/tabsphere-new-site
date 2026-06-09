@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useClientAuth } from './ClientAuthContext'
 import { supabase } from '../lib/supabase'
-import { FolderOpen, Receipt, MessageSquare, Clock, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react'
+import { FolderOpen, Receipt, MessageSquare, Clock, ArrowRight } from 'lucide-react'
 
 export default function ClientDashboard() {
   const { user } = useClientAuth()

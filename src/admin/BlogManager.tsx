@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase, type BlogPost } from '../lib/supabase'
-import { Plus, Search, Pencil, Trash2, X, Save, Eye, EyeOff, Calendar, Tag } from 'lucide-react'
+import { Plus, Search, Pencil, Trash2, X, Save, EyeOff, Calendar, Tag } from 'lucide-react'
 
 export default function BlogManager() {
   const [posts, setPosts] = useState<BlogPost[]>([])
