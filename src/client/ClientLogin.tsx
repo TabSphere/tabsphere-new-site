@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useClientAuth } from './ClientAuthContext'
-import { Globe, Lock, Mail, Eye, EyeOff } from 'lucide-react'
+import { Lock, Mail, Eye, EyeOff } from 'lucide-react'
 
 export default function ClientLogin() {
   const { signIn } = useClientAuth()

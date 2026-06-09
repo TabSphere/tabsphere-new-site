@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router'
 import { useClientAuth } from './ClientAuthContext'
 import { supabase } from '../lib/supabase'
-import { ArrowLeft, Clock, CheckCircle, Circle, MessageSquare, Send, Paperclip, FileText, Download } from 'lucide-react'
+import { ArrowLeft, Clock, CheckCircle, Circle, MessageSquare, Send, FileText, Download } from 'lucide-react'
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>()

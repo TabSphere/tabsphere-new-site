@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Globe, ChevronDown, ShoppingBag, ExternalLink, BookOpen } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, ShoppingBag, ExternalLink } from 'lucide-react';
 
 const navLinks = [
   { label: 'Home', href: '#home' },

@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router'
 import {
   LayoutDashboard, FileText, Users, Briefcase, BookOpen,
   Mail, Newspaper, FolderOpen, FolderKanban, Receipt,
-  Settings, LogOut, Menu, X, ChevronRight, Globe
+  Settings, LogOut, Menu, ChevronRight, Globe
 } from 'lucide-react'
 
 const navItems = [

@@ -1,6 +1,6 @@
 import { useClientAuth } from './ClientAuthContext'
 import { NavLink, Outlet, Navigate } from 'react-router'
-import { LayoutDashboard, FolderOpen, Receipt, MessageSquare, LogOut, Menu, X, Globe } from 'lucide-react'
+import { LayoutDashboard, FolderOpen, Receipt, MessageSquare, LogOut, Menu } from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [

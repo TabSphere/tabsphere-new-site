@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase, type Employee } from '../lib/supabase'
-import { Plus, Search, Filter, Pencil, Trash2, X, Save, FileText, Upload } from 'lucide-react'
+import { Plus, Search, Pencil, Trash2, X, Save, FileText } from 'lucide-react'
 
 const statusColors: Record<string, string> = {
   applicant: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
